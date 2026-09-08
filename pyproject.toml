@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forgefleet-agent"
+version = "1.0.0"
+description = "Production-ready ForgeFleet Agent for Windows - Local network bridge between ForgeFleet SaaS and FlashForge 3D printers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "ForgeFleet Team", email = "team@forgefleet.example.com"}
+]
+keywords = [
+    "3d-printing",
+    "flashforge",
+    "forgefleet",
+    "iot",
+    "agent",
+    "windows",
+    "cloud",
+    "printer-management"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+    "Topic :: System :: Hardware"
+]
+
+dependencies = [
+    "aiohttp>=3.9.0",
+    "asyncio-contextmanager>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "structlog>=24.1.0",
+    "pydantic>=2.0.0",
+    "psutil>=5.9.0",
+    "pywin32>=306",
+    "httpx>=0.25.0",
+    "websockets>=12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+    "pylint>=3.0.0",
+]
+
+build = [
+    "pyinstaller>=6.0.0",
+    "nsis>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/rssgasim/forgefleet-agent"
+Documentation = "https://github.com/rssgasim/forgefleet-agent#readme"
+Repository = "https://github.com/rssgasim/forgefleet-agent"
+Issues = "https://github.com/rssgasim/forgefleet-agent/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
